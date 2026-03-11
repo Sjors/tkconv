@@ -53,7 +53,7 @@ executable('tkindex', 'tkindex.cc', 'arghelpers.cc', 'support.cc', 'siphash.cc',
 	cpphttplib, sqlitewriter_dep, pugi_dep,
 	argparse_dep, vcs_dep])
 
-executable('tkpull', 'tkpull.cc', 'support.cc', 'siphash.cc',
+executable('tkpull', 'tkpull.cc', 'arghelpers.cc', 'support.cc', 'siphash.cc',
 	dependencies: [sqlitedep, json_dep, fmt_dep, cpphttplib,
 	simplesockets_dep,
 	sqlitewriter_dep, pugi_dep,

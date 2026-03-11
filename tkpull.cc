@@ -9,6 +9,8 @@
 #include "httplib.h"
 #include <set>
 #include "support.hh"
+#include "argparse/argparse.hpp"
+#include "arghelpers.hh"
 
 using namespace std;
 
@@ -79,10 +81,28 @@ struct ThrottleDB
 
 int main(int argc, char** argv)
 {
+  argparse::ArgumentParser args("tkpull", "0.0");
+
+  args.add_argument("--begin")
+    .help("Begin date for pulling documents, 2024-12-05 format")
+    .default_value("2017-01-01");
+
+  try {
+    args.parse_args(argc, argv);
+  }
+  catch (const std::runtime_error& err) {
+    std::cout << err.what() << std::endl << args;
+    std::exit(1);
+  }
+
   SQLiteWriter sqlw("tk.sqlite3", SQLWFlag::ReadOnly);
 
   int sizlim = 250000000;
-  string limit="2007-01-01";
+  string limit = args.get<string>("--begin");
+  if(!isValidDate(limit)) {
+    fmt::print("The configured begin limit does not look like a date: '{}' (should be 2024-12-25)\n", limit);
+    return EXIT_FAILURE;
+  }
   auto wantDocs = sqlw.queryT("select id,enclosure,contentLength from Document where datum > ? and contentLength < ?", {limit, sizlim});
 
   auto alleVerslagen = sqlw.queryT("select Verslag.id as id, vergadering.id as vergaderingid,enclosure,contentLength,datum from Verslag,Vergadering where Verslag.vergaderingId=Vergadering.id and datum > ? order by datum desc, verslag.updated desc", {limit});
