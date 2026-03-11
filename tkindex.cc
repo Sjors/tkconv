@@ -1,13 +1,13 @@
 #include <fmt/format.h>
 #include <fmt/printf.h>
 #include <fmt/ranges.h>
-#include <regex>
 #include <mutex>
 #include <iostream>
 #include "sqlwriter.hh"
 #include <atomic>
 #include "support.hh"
 #include <unordered_set>
+#include "arghelpers.hh"
 #include "argparse/argparse.hpp"
 
 using namespace std;
@@ -98,9 +98,7 @@ int main(int argc, char** argv)
   }
   cout<<"Limit for documents: "<<limit<<endl;
   SQLiteWriter todo("tk.sqlite3", SQLWFlag::ReadOnly);
-
-  std::regex dregex(R"(\d{4}-\d{2}-\d{2})");
-  if(!regex_match(limit, dregex)) {
+  if(!isValidDate(limit)) {
     fmt::print("The configured begin limit does not look like a date: '{}' (should be 2024-12-25)\n", limit);
     return EXIT_FAILURE;
   }

@@ -12,6 +12,7 @@
 #include <fmt/printf.h>
 #include "nlohmann/json.hpp"
 
+#include "arghelpers.hh"
 #include "support.hh"
 
 using namespace std;
@@ -57,6 +58,12 @@ TEST_CASE("deHTML")
 {
   CHECK(deHTML("<html><body>Hallo allemaal!</body></html>") ==
 	"  Hallo allemaal!  ");
+}
+
+TEST_CASE("Date validation")
+{
+  CHECK(isValidDate("2026-03-11"));
+  CHECK_FALSE(isValidDate("2026-3-11"));
 }
 
 

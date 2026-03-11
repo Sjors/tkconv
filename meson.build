@@ -47,7 +47,7 @@ executable('tkbot', 'tkbot.cc', 'support.cc', 'siphash.cc', 'scanmon.cc', 'searc
 	sqlitewriter_dep, pugi_dep, simplesockets_dep,
 	argparse_dep, vcs_dep])
 
-executable('tkindex', 'tkindex.cc', 'support.cc', 'siphash.cc',
+executable('tkindex', 'tkindex.cc', 'arghelpers.cc', 'support.cc', 'siphash.cc',
 	dependencies: [sqlitedep, json_dep, fmt_dep,
 	simplesockets_dep,
 	cpphttplib, sqlitewriter_dep, pugi_dep,
@@ -87,6 +87,6 @@ executable('playground', 'playground.cc', 'support.cc', 'siphash.cc',
 #	argparse_dep, vcs_dep])
 
 
-executable('testrunner', 'testrunner.cc', 'support.cc',  'siphash.cc', 'search.cc', 
+executable('testrunner', 'testrunner.cc', 'arghelpers.cc', 'support.cc',  'siphash.cc', 'search.cc', 
 dependencies: [sqlitedep, json_dep, fmt_dep, sqlitedep, sqlitewriter_dep, doctest_dep, cpphttplib, simplesockets_dep])
 
