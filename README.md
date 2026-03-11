@@ -197,6 +197,15 @@ do
 done
 ```
 
+Voor development kan je `tkpull` en `tkindex` beperken tot recentere data,
+zodat je minder documenten hoeft binnen te halen en minder hoeft te indexeren.
+Bijvoorbeeld:
+
+```bash
+./build/tkpull --begin=2026-01-01
+./build/tkindex --begin=2026-01-01
+```
+
 En parallel:
 
 ```bash
