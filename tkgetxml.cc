@@ -57,7 +57,7 @@ int main(int argc, char** argv)
       int entries = 0;
       httplib::Client cli("https://gegevensmagazijn.tweedekamer.nl");
       cli.set_connection_timeout(10, 0); 
-      cli.set_read_timeout(10, 0); 
+      cli.set_read_timeout(30, 0); 
       cli.set_write_timeout(10, 0); 
       
       fmt::print("Retrieving from {}.. ", next);
