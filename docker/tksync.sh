@@ -2,9 +2,9 @@
 
 while true
 do
-  cp -r /workdir/html /app/html
-  cp -r /workdir/partials /app/partials
-  cp -r /workdir/build /app/build
+  mkdir -p /app/html /app/partials
+  cp -r /workdir/html/. /app/html
+  cp -r /workdir/partials/. /app/partials
   cp /workdir/tk.xslt /app/tk.xslt
   cp /workdir/tk-div.xslt /app/tk-div.xslt
 
